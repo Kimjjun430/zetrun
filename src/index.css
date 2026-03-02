@@ -20,6 +20,13 @@ body {
   font-family: 'Rajdhani', 'Trebuchet MS', sans-serif;
 }
 
+html,
+body,
+#root {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 #root {
   min-height: 100vh;
 }
@@ -72,6 +79,109 @@ body {
 
 .runner-node {
   transform: translate3d(-50%, 0, 0);
+  transform-origin: 50% 72%;
+}
+
+.race-core {
+  border: 1px solid rgba(125, 211, 252, 0.17);
+  box-shadow:
+    inset 0 0 0 1px rgba(125, 211, 252, 0.06),
+    inset 0 -24px 38px rgba(15, 23, 42, 0.48);
+  contain: layout paint;
+}
+
+.camera-layer {
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: 50% 84%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.speed-lines {
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes speed-stream {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 140%, 0) scaleY(0.8);
+  }
+  14% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -140%, 0) scaleY(1.15);
+  }
+}
+
+.speed-line {
+  position: absolute;
+  bottom: -24%;
+  width: 2px;
+  height: 26%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(226, 232, 240, 0.05), rgba(56, 189, 248, 0.75), rgba(226, 232, 240, 0.05));
+  animation-name: speed-stream;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes obstacle-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.obstacle-field {
+  position: absolute;
+  transform: translate(-50%, 50%);
+  border-radius: 999px;
+  pointer-events: none;
+  animation: obstacle-pulse 1.45s ease-in-out infinite;
+  filter: saturate(1.08);
+}
+
+.obstacle-active {
+  animation-play-state: running;
+}
+
+.obstacle-idle {
+  animation-play-state: paused;
+  opacity: 0.3;
+}
+
+.obstacle-core {
+  position: absolute;
+  inset: 22% 18%;
+  border-radius: 999px;
+  border: 1px dashed rgba(226, 232, 240, 0.62);
+}
+
+.obstacle-storm {
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.42), rgba(51, 65, 85, 0.08) 72%);
+  box-shadow:
+    0 0 18px rgba(148, 163, 184, 0.2),
+    inset 0 0 18px rgba(30, 41, 59, 0.55);
+}
+
+.obstacle-tailwind {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.42), rgba(14, 116, 144, 0.06) 70%);
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.25),
+    inset 0 0 16px rgba(8, 145, 178, 0.38);
+}
+
+.obstacle-updraft {
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.38), rgba(180, 83, 9, 0.08) 70%);
+  box-shadow:
+    0 0 20px rgba(251, 191, 36, 0.28),
+    inset 0 0 16px rgba(217, 119, 6, 0.42);
 }
 
 @keyframes plane-bob {
@@ -141,4 +251,22 @@ body {
   animation-fill-mode: both;
   animation-iteration-count: 1;
   animation-timing-function: linear;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
