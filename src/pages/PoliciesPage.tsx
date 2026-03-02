@@ -4,9 +4,33 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 function PoliciesPage() {
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'wnsgud4300@naver.com',
+      },
+    ],
+    name: 'zetrun',
+    url: 'https://zetrun.app/',
+  }
+
   return (
     <>
-      <Seo title="정책" description="zetrun 개인정보처리방침, 이용약관, 광고 운영 원칙을 확인할 수 있습니다." />
+      <Seo
+        title="정책"
+        description="zetrun 개인정보처리방침, 이용약관, 광고 운영 원칙과 문의 정보를 확인할 수 있습니다."
+        keywords={['개인정보처리방침', '이용약관', '광고 정책', 'zetrun 문의']}
+        structuredData={organizationSchema}
+      />
+
+      <section className="mb-4 rounded-xl border border-slate-700/70 bg-slate-900/65 p-5">
+        <h1 className="title-font text-2xl font-black text-cyan-100 md:text-3xl">정책 및 운영 정보</h1>
+        <p className="mt-2 text-sm text-slate-300">서비스 이용 전에 확인해야 할 정책과 운영 원칙을 한곳에서 볼 수 있습니다.</p>
+      </section>
 
       <Card id="policies">
         <CardHeader>

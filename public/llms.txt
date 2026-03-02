@@ -1,0 +1,16 @@
+# zetrun
+
+zetrun은 브라우저에서 바로 플레이할 수 있는 비행기 레이스 게임입니다.
+사용자가 입력한 비행기 이름과 설정은 현재 기기 안에서만 저장됩니다.
+
+## 핵심 정보
+- 서비스 유형: 웹 기반 오락용 레이스 게임
+- 주요 기능: 실시간 순위, 장애물, 추락 판정, 리더 추적 카메라, 상위 3등 결과 표시
+- 데이터 처리: 서버 저장 없음, 로컬 저장만 사용
+- 문의: wnsgud4300@naver.com
+
+## 주요 페이지
+- 홈: https://zetrun.app/
+- 게임: https://zetrun.app/game
+- 가이드: https://zetrun.app/guide
+- 정책: https://zetrun.app/policies

@@ -3,13 +3,61 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
+const GUIDE_FAQ = [
+  {
+    answer: '아니요. 레이스마다 속도와 장애물 영향이 달라 결과가 달라질 수 있습니다.',
+    question: '결과는 매번 동일한가요?',
+  },
+  {
+    answer: '입력한 정보는 이 기기 안에서만 저장되며 외부로 전송되지 않습니다.',
+    question: '입력한 이름은 어디에 저장되나요?',
+  },
+  {
+    answer: '광고 심사가 완료되면 광고 영역이 자동으로 표시됩니다.',
+    question: '광고가 보이지 않을 때는 어떻게 하나요?',
+  },
+]
+
 function GuidePage() {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: GUIDE_FAQ.map((item) => ({
+      '@type': 'Question',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+      name: item.question,
+    })),
+  }
+
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'zetrun 레이스 시작 방법',
+    step: [
+      { '@type': 'HowToStep', name: '비행기 이름 입력', text: '수식 입력 또는 목록 편집으로 참가 비행기 이름을 정합니다.' },
+      { '@type': 'HowToStep', name: '레이스 시작', text: '레이스 시작 버튼을 누르면 비행기가 하단에서 상단 결승선으로 이동합니다.' },
+      { '@type': 'HowToStep', name: '결과 확인', text: '실시간 순위와 최종 1~3등 결과 패널을 확인합니다.' },
+    ],
+  }
+
   return (
     <>
       <Seo
         title="가이드"
         description="zetrun 레이스 규칙, 장애물 판정, 순위 계산 방식, 공정성 원칙과 콘텐츠 정책을 안내합니다."
+        keywords={['레이스 규칙', '게임 가이드', 'zetrun 사용법', '비행기 레이스 방법']}
+        structuredData={[faqSchema, howToSchema]}
       />
+
+      <section className="mb-4 rounded-xl border border-slate-700/70 bg-slate-900/65 p-5">
+        <h1 className="title-font text-2xl font-black text-cyan-100 md:text-3xl">zetrun 가이드</h1>
+        <p className="mt-2 text-sm text-slate-300">
+          규칙, 진행 방식, 결과 해석 방법을 한 번에 확인할 수 있는 안내 페이지입니다. 처음 플레이하는 사용자도 빠르게 이해할 수 있도록 작성했습니다.
+        </p>
+      </section>
 
       <Card>
         <CardHeader>
@@ -58,18 +106,12 @@ function GuidePage() {
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible>
-            <AccordionItem value="q1">
-              <AccordionTrigger>결과는 매번 동일한가요?</AccordionTrigger>
-              <AccordionContent>아니요. 레이스마다 속도/장애물 영향이 달라 결과가 달라질 수 있습니다.</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q2">
-              <AccordionTrigger>입력한 이름은 어디에 저장되나요?</AccordionTrigger>
-              <AccordionContent>입력한 정보는 이 기기 안에서만 저장되며 외부로 전송되지 않습니다.</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q3">
-              <AccordionTrigger>광고가 보이지 않을 때는 어떻게 하나요?</AccordionTrigger>
-              <AccordionContent>광고 심사가 완료되면 광고 영역이 자동으로 표시됩니다.</AccordionContent>
-            </AccordionItem>
+            {GUIDE_FAQ.map((item, index) => (
+              <AccordionItem key={item.question} value={`q${index + 1}`}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </CardContent>
       </Card>

@@ -20,6 +20,14 @@ npm run dev
 npm run build
 ```
 
+## Cloudflare 배포
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+- SPA 라우팅: `public/_redirects` 포함 (`/* /index.html 200`)
+
+모듈 MIME 오류(`application/octet-stream`)가 보이면 대부분 빌드 산출물 대신 프로젝트 루트를 서빙하는 경우입니다. 반드시 출력 디렉터리를 `dist`로 설정해 배포하세요.
+
 ## 라우트
 
 - `/` 홈
@@ -37,7 +45,7 @@ VITE_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
 VITE_ADSENSE_SLOT=1234567890
 ```
 
-3. 승인 전/미설정 상태에서는 광고 슬롯에 안내 placeholder가 표시됩니다.
+3. 승인 전/미설정 상태에서는 광고 슬롯이 표시되지 않습니다.
 
 ## SEO/품질 파일
 
